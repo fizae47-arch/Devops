@@ -7,7 +7,7 @@ on:
     branches: [main]
 
 jobs:
-  check:
+  check-and-build:
     runs-on: ubuntu-latest
 
     steps:
@@ -19,3 +19,6 @@ jobs:
 
       - name: Check application file
         run: test -f app.js
+
+      - name: Build Docker image
+        run: docker build -t devops-practice-app:latest .
