@@ -1,4 +1,4 @@
-name: Node.js CI
+name: Node.js CI and Docker CD
 
 on:
   push:
@@ -21,4 +21,15 @@ jobs:
         run: test -f app.js
 
       - name: Build Docker image
-        run: docker build -t devops-practice-app:latest .
+        run: docker build -t fizaeman/devops-practice-app:latest .
+
+      - name: Login to Docker Hub
+        if: github.event_name == 'push'
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Push Docker image
+        if: github.event_name == 'push'
+        run: docker push fizaeman/devops-practice-app:latest
