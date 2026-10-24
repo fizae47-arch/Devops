@@ -1,0 +1,7 @@
+services:
+  app:
+    build: .
+    container_name: devops-compose-app
+    ports:
+      - "3002:3000"
+    restart: unless-stopped
