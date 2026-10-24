@@ -1,6 +1,6 @@
 services:
   app:
-    build: .
+    image: fizaeman/devops-practice-app:latest
     container_name: devops-compose-app
     ports:
       - "3002:3000"
